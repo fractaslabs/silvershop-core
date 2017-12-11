@@ -96,9 +96,13 @@ class CartEditField extends FormField
     {
         $editables = ArrayList::create();
         foreach ($this->items as $item) {
-            $buyable = $item->Product();
+            $buyable = $item->Buyable();
             if (!$buyable) {
                 continue;
+            }
+            // If the buyable is a variation, use the belonging product instead for variation-form generation
+            if ($buyable instanceof ProductVariation) {
+                $buyable = $buyable->Product();
             }
             $name = $this->name . "[$item->ID]";
             $quantity = TextField::create(

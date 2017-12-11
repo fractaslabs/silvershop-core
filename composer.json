@@ -13,13 +13,13 @@
 	],
 	"require" : {
         "php": ">=5.5",
-		"silverstripe/cms": "~3.1",
-		"silverstripe/framework": "~3.1",
-		"silverstripe/silverstripe-omnipay" : "~2.0",
+		"silverstripe/cms": "^3.1",
+		"silverstripe/framework": "^3.1",
+		"silverstripe/silverstripe-omnipay" : "^2.1",
 		"icecaster/versioned-gridfield": "~1.0",
 		"burnbright/silverstripe-listsorter": "~2.0",
 		"burnbright/silverstripe-sqlquerylist": "~1.0",
-        "markguinn/silverstripe-email-helpers": "~1.3"
+        "markguinn/silverstripe-email-helpers": "^1.3.1"
 	},
 	"require-dev": {
 		"guzzle/plugin-mock": "~3.1",
@@ -45,7 +45,7 @@
 		"installer-name": "silvershop",
 		"snapshot" : "https://raw.github.com/silvershop/silvershop-core/gh-pages/assets/screenshots/shipping%20estimate%20form.png",
 		"branch-alias": {
-			"dev-master": "1.2.x-dev"
+			"dev-master": "2.x-dev"
 		}
 	},
 	"support":{

@@ -35,25 +35,27 @@ class CheckoutPage extends Page
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        $fields->addFieldsToTab(
-            'Root.Main',
-            array(
-                HtmlEditorField::create(
-                    'PurchaseComplete',
-                    _t('CheckoutPage.db_PurchaseComplete', 'Purchase Complete'),
-                    4
-                )
-                    ->setDescription(
-                        _t(
-                            'CheckoutPage.PurchaseCompleteDescription',
-                            "This message is included in reciept email, after the customer submits the checkout"
-                        )
-                    ),
-            ),
-            'Metadata'
-        );
-        return $fields;
+        $this->beforeUpdateCMSFields(function(FieldList $fields) {
+            $fields->addFieldsToTab(
+                'Root.Main',
+                array(
+                    HtmlEditorField::create(
+                        'PurchaseComplete',
+                        _t('CheckoutPage.db_PurchaseComplete', 'Purchase Complete'),
+                        4
+                    )
+                        ->setDescription(
+                            _t(
+                                'CheckoutPage.PurchaseCompleteDescription',
+                                "This message is included in reciept email, after the customer submits the checkout"
+                            )
+                        ),
+                ),
+                'Metadata'
+            );
+        });
+
+        return parent::getCMSFields();
     }
 
     /**
@@ -101,8 +103,8 @@ class CheckoutPage_Controller extends Page_Controller
 
     public function Title()
     {
-        if ($this->Title) {
-            return $this->Title;
+        if ($this->failover && $this->failover->Title) {
+            return $this->failover->Title;
         }
 
         return _t('CheckoutPage.DefaultTitle', "Checkout");
@@ -125,7 +127,7 @@ class CheckoutPage_Controller extends Page_Controller
         if ($config->getComponentByType('OnsitePaymentCheckoutComponent')) {
             $form->setActions(
                 FieldList::create(
-                    FormAction::create('checkoutSubmit', _t('CheckoutForm.SubmitPayment', 'Submit Payment'))
+                    FormAction::create('checkoutSubmit', _t('CheckoutPage.SubmitPayment', 'Submit Payment'))
                 )
             );
         }
